@@ -1,3 +1,16 @@
+# [1.2.0](https://github.com/miguel-rosa/test-semantic-release/compare/v1.1.0...v1.2.0) (2024-09-20)
+
+
+### Bug Fixes
+
+* remove credentials on checkout flow to avoid token overlap ([202947b](https://github.com/miguel-rosa/test-semantic-release/commit/202947b0c0dd3cb5c2c98695245c62b3939f5de8))
+* update the id on the release workflow step ([217a332](https://github.com/miguel-rosa/test-semantic-release/commit/217a33274688428817c17850802292b9ad586eed))
+
+
+### Features
+
+* update the action to get the token ([520366a](https://github.com/miguel-rosa/test-semantic-release/commit/520366a954edb0732304f7981cf3f7b2826a392a))
+
 # [1.1.0](https://github.com/miguel-rosa/test-semantic-release/compare/v1.0.1...v1.1.0) (2024-09-19)
 
 
