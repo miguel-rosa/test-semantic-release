@@ -25,6 +25,7 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: "20.14.0"
