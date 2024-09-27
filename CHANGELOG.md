@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/miguel-rosa/test-semantic-release/compare/v1.2.0...v1.2.1) (2024-09-27)
+
+
+### Bug Fixes
+
+* add netlify multile deploys ([13d21f7](https://github.com/miguel-rosa/test-semantic-release/commit/13d21f7204fd2ea2a06a5af8adc5fe62cf44b78b))
+
 # [1.2.0](https://github.com/miguel-rosa/test-semantic-release/compare/v1.1.0...v1.2.0) (2024-09-20)
 
 
