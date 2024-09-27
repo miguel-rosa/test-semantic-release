@@ -1,0 +1,21 @@
+name: Run Netlify Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  reseller-staging:
+    uses: ./.github/workflows/reusable-netlify-deploy.yml
+    secrets: inherit
+    with:
+      build_command: build-test-1
+      site_id: 3c9bcdf8-86e3-4d90-921b-4dc8193b555e
+
+  reseller-production:
+    uses: ./.github/workflows/reusable-netlify-deploy.yml
+    secrets: inherit
+    with:
+      build_command: build-test-2
+      site_id: c3ecefb4-daa4-4c70-8a7c-dc7cd4718c94
