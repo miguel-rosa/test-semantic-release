@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/miguel-rosa/test-semantic-release/compare/v1.2.2...v1.2.3) (2024-09-30)
+
+
+### Bug Fixes
+
+* remove dynamic created file ([dc53b78](https://github.com/miguel-rosa/test-semantic-release/commit/dc53b7899f7729d1ee3993f4ce5bb552e95742ad))
+
 ## [1.2.2](https://github.com/miguel-rosa/test-semantic-release/compare/v1.2.1...v1.2.2) (2024-09-30)
 
 
