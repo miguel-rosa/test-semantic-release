@@ -6,9 +6,6 @@ on:
       site_id:
         required: true
         type: string
-      build_command:
-        required: true
-        type: string
 
 jobs:
   netlify-deploy:
