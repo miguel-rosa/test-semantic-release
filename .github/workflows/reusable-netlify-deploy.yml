@@ -21,11 +21,6 @@ jobs:
           node-version: "20.14.0"
       - name: Install dependencies
         run: npm ci
-      - name: Create build file
-        run: |
-          echo "[build]" > ./.netlify.toml
-          echo '  command = "export REACT_APP_NETLIFY_BUILD_ID=$BUILD_ID && export REACT_APP_NETLIFY_COMMIT_REF=$COMMIT_REF && npm run ${{inputs.build_command}}"' >> ./.netlify.toml
-          echo '  publish = "build"' >> ./.netlify.toml
       - name: Publish
         uses: netlify/actions/cli@master
         with:
@@ -33,5 +28,3 @@ jobs:
         env:
           NETLIFY_SITE_ID: ${{ inputs.site_id }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      - name: Clean up
-        run: rm -rf ./.netlify.toml
