@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/miguel-rosa/test-semantic-release/compare/v1.2.3...v1.2.4) (2024-09-30)
+
+
+### Bug Fixes
+
+* remove unused build inputs ([e6a287b](https://github.com/miguel-rosa/test-semantic-release/commit/e6a287be78297a8cb68d9f2dd8fd5683c58d7cb3))
+
 ## [1.2.3](https://github.com/miguel-rosa/test-semantic-release/compare/v1.2.2...v1.2.3) (2024-09-30)
 
 
