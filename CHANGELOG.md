@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/miguel-rosa/test-semantic-release/compare/v1.2.1...v1.2.2) (2024-09-30)
+
+
+### Bug Fixes
+
+* add publish location on build command ([ff732ed](https://github.com/miguel-rosa/test-semantic-release/commit/ff732edec220837ab8e130b1da3395ed816a5e11))
+
 ## [1.2.1](https://github.com/miguel-rosa/test-semantic-release/compare/v1.2.0...v1.2.1) (2024-09-27)
 
 
