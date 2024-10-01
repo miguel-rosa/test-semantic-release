@@ -46,11 +46,11 @@ jobs:
           prod_flag=""
           if [ "${{ inputs.is_production }}" = true ]; then prod_flag="--prod"; fi
           netlify deploy \
+            --alias deploy-preview-$PR_ID \
             --build \
+            --dir _build \
             --site ${{ inputs.site_id }} \
             --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} \
-            # --dir=_build \
-            --alias="deploy-preview-$PR_ID" \
             $prod_flag  \
             --json \
             > deploy_output.json
