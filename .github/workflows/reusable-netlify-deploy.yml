@@ -9,6 +9,14 @@ on:
       build_command:
         required: true
         type: string
+      is_production:
+        required: true
+        type: boolean
+env:
+  BRANCH_NAME: ${{ github.ref_name }}
+
+permissions:
+  pull-requests: write
 
 jobs:
   netlify-deploy:
@@ -35,8 +43,46 @@ jobs:
       - name: Deploy to Netlify
         id: netlify_deploy
         run: |
+          prod_flag=""
+          if [ "$is_production" = true ]; then prod_flag="--prod"; fi
           netlify deploy \
             --build \
-            --prod \
             --site ${{ inputs.site_id }} \
             --auth ${{ secrets.NETLIFY_AUTH_TOKEN }}
+            $prod_flag  \
+            --json \
+            > deploy_output.json
+
+      - name: Generate URL Preview
+        id: url_preview
+        if: ${{ is_production == false }}
+        run: |
+          NETLIFY_PREVIEW_URL=$(jq -r '.deploy_url' deploy_output.json)
+          echo "NETLIFY_PREVIEW_URL=$NETLIFY_PREVIEW_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Comment URL Preview on PR
+        uses: actions/github-script@v7
+        if: ${{ is_production == false }}
+        env:
+          NETLIFY_PREVIEW_URL: ${{ steps.url_preview.outputs.NETLIFY_PREVIEW_URL }}
+        with:
+          script: |
+            async function comment(){
+              const result = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                commit_sha: context.sha,
+              })
+              const issueNumber = result.data[0].number
+              if(issueNumber){
+                await github.rest.issues.createComment({
+                  issue_number: issueNumber,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: 'Preview URL: ' + process.env.NETLIFY_PREVIEW_URL
+                })
+              }else{
+                console.log('No PR found for commit ' + context.sha)
+              }
+            }
+            comment()

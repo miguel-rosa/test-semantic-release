@@ -1,9 +1,10 @@
-name: Run Netlify Deploy
+name: Publish Preview URL
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -15,7 +16,7 @@ jobs:
     secrets: inherit
     with:
       build_command: build-test-1
-      is_production: true
+      is_production: false
       site_id: 3c9bcdf8-86e3-4d90-921b-4dc8193b555e
 
   reseller-production:
@@ -23,5 +24,5 @@ jobs:
     secrets: inherit
     with:
       build_command: build-test-2
-      is_production: true
+      is_production: false
       site_id: c3ecefb4-daa4-4c70-8a7c-dc7cd4718c94
