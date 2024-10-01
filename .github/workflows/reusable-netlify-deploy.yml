@@ -43,6 +43,7 @@ jobs:
         run: |
           echo "[build]" > .netlify.toml
           echo '  command = "export REACT_APP_NETLIFY_BUILD_ID=$BUILD_ID && export REACT_APP_NETLIFY_COMMIT_REF=$COMMIT_REF && npm run ${{inputs.build_command}}"' >> .netlify.toml
+          echo '  publish = "build"' >> .netlify.toml
           cat .netlify.toml
 
       - name: Deploy to Netlify
@@ -50,7 +51,7 @@ jobs:
         run: |
           prod_flag=""
           if [ "${{ inputs.should_deploy_to_production }}" = true ]; then prod_flag="--prod"; fi
-          netlify deploy dir=./build \
+          netlify deploy --dir=build \
             --alias deploy-preview-$PR_ID \
             --build \
             --site ${{ inputs.site_id }} \
