@@ -15,6 +15,9 @@ on:
       should_deploy_to_production:
         required: true
         type: boolean
+      environment:
+        required: true
+        type: string
 env:
   PR_ID: ${{ github.event.number }}
 
