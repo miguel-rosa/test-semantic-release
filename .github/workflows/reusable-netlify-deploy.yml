@@ -71,6 +71,8 @@ jobs:
         if: ${{ !inputs.should_deploy_to_production }}
         env:
           NETLIFY_PREVIEW_URL: ${{ steps.url_preview.outputs.NETLIFY_PREVIEW_URL }}
+          INPUT_ENVIRONMENT: ${{ inputs.environment }}
+          INPUT_APPLICATION: ${{ inputs.application }}
         with:
           script: |
             const { data: comments } = await github.rest.issues.listComments({
@@ -79,7 +81,8 @@ jobs:
               repo: context.repo.repo,
             });
 
-            const commentBody = inputs.environment + ' preview URL for ' + inputs.application + ': ' + process.env.NETLIFY_PREVIEW_URL
+            const commentBody = process.env.INPUT_ENVIRONMENT + ' preview URL for ' + process.env.INPUT_APPLICATION + ': ' + process.env.NETLIFY_PREVIEW_URL
+
 
             const existingComment = comments.find(comment => 
               comment.body === commentBody
