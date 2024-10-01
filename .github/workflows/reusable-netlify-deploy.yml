@@ -3,13 +3,16 @@ name: Netlify Deploy
 on:
   workflow_call:
     inputs:
+      application:
+        required: true
+        type: string
       site_id:
         required: true
         type: string
       build_command:
         required: true
         type: string
-      is_production:
+      should_deploy_to_production:
         required: true
         type: boolean
 env:
@@ -43,7 +46,7 @@ jobs:
         id: netlify_deploy
         run: |
           prod_flag=""
-          if [ "${{ inputs.is_production }}" = true ]; then prod_flag="--prod"; fi
+          if [ "${{ inputs.should_deploy_to_production }}" = true ]; then prod_flag="--prod"; fi
           netlify deploy \
             --alias deploy-preview-$PR_ID \
             --build \
@@ -55,14 +58,14 @@ jobs:
 
       - name: Generate URL Preview
         id: url_preview
-        if: ${{ !inputs.is_production }}
+        if: ${{ !inputs.should_deploy_to_production }}
         run: |
           NETLIFY_PREVIEW_URL=$(jq -r '.deploy_url' deploy_output.json)
           echo "NETLIFY_PREVIEW_URL=$NETLIFY_PREVIEW_URL" >> "$GITHUB_OUTPUT"
 
       - name: Comment URL Preview on PR
         uses: actions/github-script@v7
-        if: ${{ !inputs.is_production }}
+        if: ${{ !inputs.should_deploy_to_production }}
         env:
           NETLIFY_PREVIEW_URL: ${{ steps.url_preview.outputs.NETLIFY_PREVIEW_URL }}
         with:
@@ -78,11 +81,12 @@ jobs:
             );
 
             if (!existingComment) {
+
               await github.rest.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: 'Preview URL: ' + process.env.NETLIFY_PREVIEW_URL
+                body: inputs.environment + ' Preview URL for ' + inputs.application + ': ' + process.env.NETLIFY_PREVIEW_URL
               });
             } else {
               console.log('Preview URL comment already exists. Skipping.');

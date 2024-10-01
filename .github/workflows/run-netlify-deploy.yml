@@ -10,18 +10,42 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  reseller-staging:
+  organization-staging:
     uses: ./.github/workflows/reusable-netlify-deploy.yml
     secrets: inherit
     with:
       build_command: build-test-1
-      is_production: true
-      site_id: 3c9bcdf8-86e3-4d90-921b-4dc8193b555e
+      should_deploy_to_production: true
+      site_id: c3ecefb4-daa4-4c70-8a7c-dc7cd4718c94
+      application: Organization
+      environment: Staging
+
+  reseller-staging:
+    uses: ./.github/workflows/reusable-netlify-deploy.yml
+    secrets: inherit
+    with:
+      build_command: build-test-2
+      should_deploy_to_production: true
+      site_id: 98c1fe25-d732-4cab-9438-2b01234690e9
+      application: Reseller
+      environment: Staging
+
+  organization-production:
+    uses: ./.github/workflows/reusable-netlify-deploy.yml
+    secrets: inherit
+    with:
+      build_command: build-test-1
+      should_deploy_to_production: true
+      site_id: 5aaa91e4-6783-47bb-8306-546e686ff2e0
+      application: Organization
+      environment: Production
 
   reseller-production:
     uses: ./.github/workflows/reusable-netlify-deploy.yml
     secrets: inherit
     with:
       build_command: build-test-2
-      is_production: true
-      site_id: c3ecefb4-daa4-4c70-8a7c-dc7cd4718c94
+      should_deploy_to_production: true
+      site_id: 3c9bcdf8-86e3-4d90-921b-4dc8193b555e
+      application: Organization
+      environment: Production
