@@ -49,6 +49,7 @@ jobs:
             --build \
             --site ${{ inputs.site_id }} \
             --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} \
+            --dir=build \
             $prod_flag  \
             --json \
             > deploy_output.json
