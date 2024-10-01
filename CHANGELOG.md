@@ -1,3 +1,11 @@
+## [1.2.5](https://github.com/miguel-rosa/test-semantic-release/compare/v1.2.4...v1.2.5) (2024-10-01)
+
+
+### Bug Fixes
+
+* Update build pipelines to use netlify cli instead of action ([2d643e1](https://github.com/miguel-rosa/test-semantic-release/commit/2d643e1803b36bbc5e25bb69d0d56f66fb2f9f7e))
+* update site message ([b395b3e](https://github.com/miguel-rosa/test-semantic-release/commit/b395b3e1cee977daebcb013e212abeecd5d71c95))
+
 ## [1.2.4](https://github.com/miguel-rosa/test-semantic-release/compare/v1.2.3...v1.2.4) (2024-09-30)
 
 
