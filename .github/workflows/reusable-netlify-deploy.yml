@@ -46,6 +46,13 @@ jobs:
           echo '  publish = "build"' >> .netlify.toml
           cat .netlify.toml
 
+      - name: Debug - List directories
+        run: |
+          echo "Current directory contents:"
+          ls -la
+          echo "Build directory contents (if exists):"
+          ls -la build || echo "Build directory does not exist"
+
       - name: Deploy to Netlify
         id: netlify_deploy
         run: |
@@ -58,7 +65,14 @@ jobs:
             --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} \
             $prod_flag  \
             --json \
+            --debug \
             > deploy_output.json
+        env:
+          NETLIFY_DEBUG: true
+
+      - name: Display Netlify deploy output
+        if: always()
+        run: cat deploy_output.json
 
       - name: Generate URL Preview
         id: url_preview
