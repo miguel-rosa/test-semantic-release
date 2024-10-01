@@ -79,17 +79,18 @@ jobs:
               repo: context.repo.repo,
             });
 
+            const commentBody =  inputs.environment + ' Preview URL for ' + inputs.application + ': ' + process.env.NETLIFY_PREVIEW_URL
+
             const existingComment = comments.find(comment => 
-              comment.body.startsWith('Preview URL:')
+              comment.body === commentBody
             );
 
             if (!existingComment) {
-
               await github.rest.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: inputs.environment + ' Preview URL for ' + inputs.application + ': ' + process.env.NETLIFY_PREVIEW_URL
+                body: commentBody
               });
             } else {
               console.log('Preview URL comment already exists. Skipping.');
