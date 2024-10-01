@@ -48,7 +48,6 @@ jobs:
           netlify deploy \
             --alias deploy-preview-$PR_ID \
             --build \
-            --dir _build \
             --site ${{ inputs.site_id }} \
             --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} \
             $prod_flag  \
