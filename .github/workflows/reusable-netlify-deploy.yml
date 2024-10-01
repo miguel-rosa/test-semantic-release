@@ -49,7 +49,7 @@ jobs:
             --build \
             --site ${{ inputs.site_id }} \
             --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} \
-            --dir=_build \
+            # --dir=_build \
             --alias="deploy-preview-$PR_ID" \
             $prod_flag  \
             --json \
