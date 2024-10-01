@@ -41,9 +41,11 @@ jobs:
 
       - name: Create build file
         run: |
-          echo "[build]" > .netlify.toml
-          echo '  command = "export REACT_APP_NETLIFY_BUILD_ID=$BUILD_ID && export REACT_APP_NETLIFY_COMMIT_REF=$COMMIT_REF && npm run ${{inputs.build_command}}"' >> .netlify.toml
-          echo '  publish = "build"' >> .netlify.toml
+          cat << EOF > .netlify.toml
+          [build]
+            command = "export REACT_APP_NETLIFY_BUILD_ID=\$BUILD_ID && export REACT_APP_NETLIFY_COMMIT_REF=\$COMMIT_REF && npm run ${{inputs.build_command}}"
+            publish = "build"
+          EOF
           cat .netlify.toml
 
       - name: Debug - List directories
@@ -58,12 +60,13 @@ jobs:
         run: |
           prod_flag=""
           if [ "${{ inputs.should_deploy_to_production }}" = true ]; then prod_flag="--prod"; fi
-          netlify deploy --dir=build \
+          netlify deploy \
+            --dir=build \
             --alias deploy-preview-$PR_ID \
             --build \
             --site ${{ inputs.site_id }} \
             --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} \
-            $prod_flag  \
+            $prod_flag \
             --json \
             --debug \
             > deploy_output.json
