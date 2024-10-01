@@ -2,9 +2,8 @@ name: Publish Preview URL
 
 on:
   pull_request:
-    types:
-      - opened
-      - synchronize
+    branches:
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
