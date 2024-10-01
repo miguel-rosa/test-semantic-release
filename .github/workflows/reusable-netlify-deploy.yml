@@ -79,7 +79,7 @@ jobs:
               repo: context.repo.repo,
             });
 
-            const commentBody =  inputs.environment + ' Preview URL for ' + inputs.application + ': ' + process.env.NETLIFY_PREVIEW_URL
+            const commentBody = inputs.environment + ' preview URL for ' + inputs.application + ': ' + process.env.NETLIFY_PREVIEW_URL
 
             const existingComment = comments.find(comment => 
               comment.body === commentBody
