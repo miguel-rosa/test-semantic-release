@@ -48,13 +48,6 @@ jobs:
           EOF
           cat netlify.toml
 
-      - name: Debug - List directories
-        run: |
-          echo "Current directory contents:"
-          ls -la
-          echo "Build directory contents (if exists):"
-          ls -la build || echo "Build directory does not exist"
-
       - name: Deploy to Netlify
         id: netlify_deploy
         run: |
@@ -71,13 +64,6 @@ jobs:
             > deploy_output.json
         env:
           NETLIFY_DEBUG: true
-
-      - name: Debug - List directories
-        run: |
-          echo "Current directory contents:"
-          ls -la
-          ls .. -la
-          ls ../../ -la
 
       - name: Generate URL Preview
         id: url_preview
