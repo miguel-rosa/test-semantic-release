@@ -43,8 +43,9 @@ jobs:
         run: |
           cat << EOF > .netlify.toml
           [build]
-            command = "export REACT_APP_NETLIFY_BUILD_ID=\$BUILD_ID && export REACT_APP_NETLIFY_COMMIT_REF=\$COMMIT_REF && npm run ${{inputs.build_command}}"
             publish = "build/"
+            base = "."
+            command = "export REACT_APP_NETLIFY_BUILD_ID=\$BUILD_ID && export REACT_APP_NETLIFY_COMMIT_REF=\$COMMIT_REF && npm run ${{inputs.build_command}}"
           EOF
           cat .netlify.toml
 
