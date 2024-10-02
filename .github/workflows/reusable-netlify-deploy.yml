@@ -3,13 +3,27 @@ name: Netlify Deploy
 on:
   workflow_call:
     inputs:
+      application:
+        required: true
+        type: string
       site_id:
         required: true
         type: string
       build_command:
         required: true
         type: string
+      should_deploy_to_production:
+        required: true
+        type: boolean
+      environment:
+        required: true
+        type: string
+env:
+  PR_ID: ${{ github.event.number }}
 
+permissions:
+  pull-requests: write
+  issues: write
 jobs:
   netlify-deploy:
     runs-on: ubuntu-latest
@@ -27,16 +41,80 @@ jobs:
 
       - name: Create build file
         run: |
-          echo "[build]" > .netlify.toml
-          echo '  command = "export REACT_APP_NETLIFY_BUILD_ID=$BUILD_ID && export REACT_APP_NETLIFY_COMMIT_REF=$COMMIT_REF && npm run ${{inputs.build_command}}"' >> .netlify.toml
-          # echo '  publish = "build"' >> .netlify.toml
+          cat << EOF > .netlify.toml
+          [build]
+            publish = "build"
+            command = "export REACT_APP_NETLIFY_BUILD_ID=\$BUILD_ID && export REACT_APP_NETLIFY_COMMIT_REF=\$COMMIT_REF && npm run ${{inputs.build_command}}"
+          EOF
           cat .netlify.toml
+
+      - name: Debug - List directories
+        run: |
+          echo "Current directory contents:"
+          ls -la
+          echo "Build directory contents (if exists):"
+          ls -la build || echo "Build directory does not exist"
 
       - name: Deploy to Netlify
         id: netlify_deploy
         run: |
+          prod_flag=""
+          if [ "${{ inputs.should_deploy_to_production }}" = true ]; then prod_flag="--prod"; fi
           netlify deploy \
+            --alias deploy-preview-$PR_ID \
             --build \
-            --prod \
             --site ${{ inputs.site_id }} \
-            --auth ${{ secrets.NETLIFY_AUTH_TOKEN }}
+            --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} \
+            $prod_flag \
+            --json \
+            --debug \
+            > deploy_output.json
+        env:
+          NETLIFY_DEBUG: true
+
+      - name: Debug - List directories
+        run: |
+          echo "Current directory contents:"
+          ls -la
+          ls .. -la
+          ls ../../ -la
+
+      - name: Generate URL Preview
+        id: url_preview
+        if: ${{ !inputs.should_deploy_to_production }}
+        run: |
+          NETLIFY_PREVIEW_URL=$(jq -r '.deploy_url' deploy_output.json)
+          echo "NETLIFY_PREVIEW_URL=$NETLIFY_PREVIEW_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Comment URL Preview on PR
+        uses: actions/github-script@v7
+        if: ${{ !inputs.should_deploy_to_production }}
+        env:
+          NETLIFY_PREVIEW_URL: ${{ steps.url_preview.outputs.NETLIFY_PREVIEW_URL }}
+          INPUT_ENVIRONMENT: ${{ inputs.environment }}
+          INPUT_APPLICATION: ${{ inputs.application }}
+        with:
+          script: |
+            const { data: comments } = await github.rest.issues.listComments({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            const commentBody = process.env.INPUT_ENVIRONMENT + ' preview URL for ' + process.env.INPUT_APPLICATION + ': ' + process.env.NETLIFY_PREVIEW_URL
+
+
+            const existingComment = comments.find(comment => 
+              comment.body === commentBody
+            );
+
+            if (!existingComment) {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: commentBody
+              });
+            } else {
+              console.log('Preview URL comment already exists. Skipping.');
+            }
