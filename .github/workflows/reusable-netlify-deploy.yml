@@ -60,7 +60,6 @@ jobs:
             --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} \
             $prod_flag \
             --json \
-            --debug \
             > deploy_output.json
         env:
           NETLIFY_DEBUG: true
