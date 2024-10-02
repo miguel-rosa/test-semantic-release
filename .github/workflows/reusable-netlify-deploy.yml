@@ -41,19 +41,12 @@ jobs:
 
       - name: Create build file
         run: |
-          cat << EOF > .netlify.toml
+          cat << EOF > netlify.toml
           [build]
             publish = "build"
             command = "export REACT_APP_NETLIFY_BUILD_ID=\$BUILD_ID && export REACT_APP_NETLIFY_COMMIT_REF=\$COMMIT_REF && npm run ${{inputs.build_command}}"
           EOF
-          cat .netlify.toml
-
-      - name: Debug - List directories
-        run: |
-          echo "Current directory contents:"
-          ls -la
-          echo "Build directory contents (if exists):"
-          ls -la build || echo "Build directory does not exist"
+          cat netlify.toml
 
       - name: Deploy to Netlify
         id: netlify_deploy
@@ -67,17 +60,9 @@ jobs:
             --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} \
             $prod_flag \
             --json \
-            --debug \
             > deploy_output.json
         env:
           NETLIFY_DEBUG: true
-
-      - name: Debug - List directories
-        run: |
-          echo "Current directory contents:"
-          ls -la
-          ls .. -la
-          ls ../../ -la
 
       - name: Generate URL Preview
         id: url_preview
