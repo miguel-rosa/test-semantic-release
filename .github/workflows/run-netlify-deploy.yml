@@ -9,6 +9,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  pull-requests: write
+  issues: write
+
 jobs:
   organization-staging:
     uses: ./.github/workflows/reusable-netlify-deploy.yml
