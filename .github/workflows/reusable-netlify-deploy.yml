@@ -61,7 +61,7 @@ jobs:
           prod_flag=""
           if [ "${{ inputs.should_deploy_to_production }}" = true ]; then prod_flag="--prod"; fi
           netlify deploy \
-            --dir=build \
+            --dir build \
             --alias deploy-preview-$PR_ID \
             --build \
             --site ${{ inputs.site_id }} \
