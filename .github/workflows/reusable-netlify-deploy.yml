@@ -83,8 +83,6 @@ jobs:
           ls -la
           ls .. -la
           ls ../../ -la
-          echo "Build directory contents (if exists):"
-          ls -la build || echo "Build directory does not exist"
 
       - name: Generate URL Preview
         id: url_preview
