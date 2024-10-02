@@ -61,7 +61,6 @@ jobs:
           prod_flag=""
           if [ "${{ inputs.should_deploy_to_production }}" = true ]; then prod_flag="--prod"; fi
           netlify deploy \
-            --dir build \
             --alias deploy-preview-$PR_ID \
             --build \
             --site ${{ inputs.site_id }} \
@@ -76,6 +75,13 @@ jobs:
       - name: Display Netlify deploy output
         if: always()
         run: cat deploy_output.json
+
+      - name: Debug - List directories
+        run: |
+          echo "Current directory contents:"
+          ls -la
+          echo "Build directory contents (if exists):"
+          ls -la build || echo "Build directory does not exist"
 
       - name: Generate URL Preview
         id: url_preview
