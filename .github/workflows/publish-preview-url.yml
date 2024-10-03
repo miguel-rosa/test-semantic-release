@@ -1,9 +1,10 @@
 name: Publish Preview URL
 
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["quality-checks"]
+    types:
+      - completed
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

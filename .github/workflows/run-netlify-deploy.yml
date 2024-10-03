@@ -1,9 +1,10 @@
 name: Run Netlify Deploy
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["quality-checks"]
+    types:
+      - completed
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -15,6 +16,7 @@ permissions:
 
 jobs:
   organization-staging:
+    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/reusable-netlify-deploy.yml
     secrets: inherit
     with:
@@ -25,6 +27,7 @@ jobs:
       environment: Staging
 
   reseller-staging:
+    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/reusable-netlify-deploy.yml
     secrets: inherit
     with:
@@ -35,6 +38,7 @@ jobs:
       environment: Staging
 
   organization-production:
+    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/reusable-netlify-deploy.yml
     secrets: inherit
     with:
@@ -45,6 +49,7 @@ jobs:
       environment: Production
 
   reseller-production:
+    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/reusable-netlify-deploy.yml
     secrets: inherit
     with:
