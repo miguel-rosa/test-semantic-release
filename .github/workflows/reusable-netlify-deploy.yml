@@ -61,8 +61,6 @@ jobs:
             $prod_flag \
             --json \
             > deploy_output.json
-        env:
-          NETLIFY_DEBUG: true
 
       - name: Generate URL Preview
         id: url_preview
