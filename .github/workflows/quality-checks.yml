@@ -1,6 +1,9 @@
 name: quality-checks
 run-name: ${{ github.actor }} quality-checks
-on: [push]
+
+on:
+  workflow_call:
+
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest

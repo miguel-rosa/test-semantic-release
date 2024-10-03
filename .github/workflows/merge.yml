@@ -1,0 +1,29 @@
+name: Pull Request
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  pull-requests: write
+  issues: write
+
+jobs:
+  check:
+    uses: ./.github/workflows/quality-checks.yml
+    secrets: inherit
+
+  run-netlify-deploy:
+    needs: [check]
+    uses: ./.github/workflows/run-netlify-deploy.yml
+    secrets: inherit
+
+  release:
+    needs: [run-netlify-deploy]
+    uses: ./.github/workflows/release.yml
+    secrets: inherit
