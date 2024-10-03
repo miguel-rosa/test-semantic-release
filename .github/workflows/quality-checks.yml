@@ -5,7 +5,7 @@ on:
   workflow_call:
 
 jobs:
-  check-bats-version:
+  overall-checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,3 +14,47 @@ jobs:
           node-version: "20.14.0"
       - run: npm install
       - run: npm run test
+
+  reseller-staging-build-check:
+    needs: [overall-checks]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.14.0"
+      - run: npm install
+      - run: npm run build-test-2
+
+  organization-staging-build-check:
+    needs: [overall-checks]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.14.0"
+      - run: npm install
+      - run: npm run build-test-1
+
+  reseller-production-build-check:
+    needs: [overall-checks]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.14.0"
+      - run: npm install
+      - run: npm run build-test-2
+
+  organization-production-build-check:
+    needs: [overall-checks]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.14.0"
+      - run: npm install
+      - run: npm run build-test-1

@@ -21,6 +21,6 @@ jobs:
     secrets: inherit
 
   release:
-    needs: [netlify-deploy]
+    needs: [publish-production]
     uses: ./.github/workflows/release.yml
     secrets: inherit
