@@ -16,6 +16,7 @@ jobs:
       - run: npm run test
 
   reseller-staging-build-check:
+    needs: [overall-checks]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,6 +27,7 @@ jobs:
       - run: npm run build-test-2
 
   organization-staging-build-check:
+    needs: [overall-checks]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -36,6 +38,7 @@ jobs:
       - run: npm run build-test-1
 
   reseller-production-build-check:
+    needs: [overall-checks]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -46,6 +49,7 @@ jobs:
       - run: npm run build-test-2
 
   organization-production-build-check:
+    needs: [overall-checks]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
