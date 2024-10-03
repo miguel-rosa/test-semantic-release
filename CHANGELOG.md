@@ -1,3 +1,15 @@
+## [1.2.10](https://github.com/miguel-rosa/test-semantic-release/compare/v1.2.9...v1.2.10) (2024-10-03)
+
+
+### Bug Fixes
+
+* remove debug flag on netlify build ([7ab4b07](https://github.com/miguel-rosa/test-semantic-release/commit/7ab4b072730691dafc835dc2cfd68c638b11e9ea))
+* split quality build checks ([13f0f49](https://github.com/miguel-rosa/test-semantic-release/commit/13f0f4999be0e40e1e2a013806586f4b1697660b))
+* update action names ([211c9bc](https://github.com/miguel-rosa/test-semantic-release/commit/211c9bc89682d26234c4316a29e318497507a15b))
+* update alias flag ([8afda8b](https://github.com/miguel-rosa/test-semantic-release/commit/8afda8b231ecf831f2a3bbad3a080f3e250f87ad))
+* update release dependency ([694da77](https://github.com/miguel-rosa/test-semantic-release/commit/694da7759d8e68ecfd76015c5ed48215ba6fe9b7))
+* update requirements for build checks ([0aac7a8](https://github.com/miguel-rosa/test-semantic-release/commit/0aac7a817c04fc06261f53a45c59430ce2bbf50b))
+
 ## [1.2.9](https://github.com/miguel-rosa/test-semantic-release/compare/v1.2.8...v1.2.9) (2024-10-03)
 
 
