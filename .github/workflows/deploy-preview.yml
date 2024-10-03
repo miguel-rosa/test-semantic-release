@@ -18,7 +18,7 @@ jobs:
     uses: ./.github/workflows/quality-checks.yml
     secrets: inherit
 
-  publish-preview-url:
+  publish-preview:
     needs: [check]
-    uses: ./.github/workflows/publish-preview-url.yml
+    uses: ./.github/workflows/publish-preview.yml
     secrets: inherit
