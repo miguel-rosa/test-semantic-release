@@ -1,3 +1,15 @@
+## [1.2.9](https://github.com/miguel-rosa/test-semantic-release/compare/v1.2.8...v1.2.9) (2024-10-03)
+
+
+### Bug Fixes
+
+* concurrency rules ([a4e56ea](https://github.com/miguel-rosa/test-semantic-release/commit/a4e56eaf10424d651552907c5e2d09974a305772))
+* remove test message ([2e2a6e2](https://github.com/miguel-rosa/test-semantic-release/commit/2e2a6e2ca7b7c7738c2e766e3d494b5103784395))
+* update message on the ui ([7dd6c6d](https://github.com/miguel-rosa/test-semantic-release/commit/7dd6c6dc207f574611b7f0be23a8ffc55de464e0))
+* update message on ui ([dee0f52](https://github.com/miguel-rosa/test-semantic-release/commit/dee0f523cb88319550f6b29d0b8d0059de62bedd))
+* update workflow names ([fdcd9de](https://github.com/miguel-rosa/test-semantic-release/commit/fdcd9debff49980cccaf1ad8d029f7fe4c43533e))
+* update workflow permission ([7316acf](https://github.com/miguel-rosa/test-semantic-release/commit/7316acfa42ed263dea1e0ca0b7d851b5199f3d39))
+
 ## [1.2.8](https://github.com/miguel-rosa/test-semantic-release/compare/v1.2.7...v1.2.8) (2024-10-03)
 
 
