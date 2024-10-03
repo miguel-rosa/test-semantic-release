@@ -15,9 +15,9 @@ jobs:
     uses: ./.github/workflows/quality-checks.yml
     secrets: inherit
 
-  netlify-deploy:
+  publish-production:
     needs: [check]
-    uses: ./.github/workflows/run-netlify-deploy.yml
+    uses: ./.github/workflows/publish-production.yml
     secrets: inherit
 
   release:

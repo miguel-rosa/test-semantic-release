@@ -51,16 +51,17 @@ jobs:
       - name: Deploy to Netlify
         id: netlify_deploy
         run: |
-          prod_flag=""
-          if [ "${{ inputs.should_deploy_to_production }}" = true ]; then prod_flag="--prod"; fi
+          flag=""
+          if [ "${{ inputs.should_deploy_to_production }}" = true ]; then
+            flag="--prod"
+          else
+            flag="--alias deploy-preview-$PR_ID --json > deploy_output.json"
+          fi
           netlify deploy \
-            --alias deploy-preview-$PR_ID \
+            $flag \
             --build \
             --site ${{ inputs.site_id }} \
             --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} \
-            $prod_flag \
-            --json \
-            > deploy_output.json
 
       - name: Generate URL Preview
         id: url_preview
