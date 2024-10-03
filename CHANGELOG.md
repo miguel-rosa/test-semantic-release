@@ -1,3 +1,10 @@
+## [1.2.8](https://github.com/miguel-rosa/test-semantic-release/compare/v1.2.7...v1.2.8) (2024-10-03)
+
+
+### Bug Fixes
+
+* update the release workflow ([078a832](https://github.com/miguel-rosa/test-semantic-release/commit/078a83232873114865d49892f3300c57cee58f76))
+
 ## [1.2.7](https://github.com/miguel-rosa/test-semantic-release/compare/v1.2.6...v1.2.7) (2024-10-02)
 
 
