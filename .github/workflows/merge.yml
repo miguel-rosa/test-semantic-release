@@ -6,20 +6,21 @@ on:
       - main
 
 permissions:
-  pull-requests: write
+  contents: write
   issues: write
+  pull-requests: write
 
 jobs:
   check:
     uses: ./.github/workflows/quality-checks.yml
     secrets: inherit
 
-  run-netlify-deploy:
+  netlify-deploy:
     needs: [check]
     uses: ./.github/workflows/run-netlify-deploy.yml
     secrets: inherit
 
   release:
-    needs: [run-netlify-deploy]
+    needs: [netlify-deploy]
     uses: ./.github/workflows/release.yml
     secrets: inherit
