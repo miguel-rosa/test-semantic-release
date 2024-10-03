@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React Test Build ID:
+          Learn React Build ID:
           {process.env.REACT_APP_NETLIFY_BUILD_ID}
           Commit Ref:
           {process.env.REACT_APP_NETLIFY_COMMIT_REF}
