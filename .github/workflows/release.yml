@@ -1,10 +1,8 @@
 name: Release
 run-name: ${{ github.actor }} Release
 on:
-  workflow_run:
-    workflows: ["Run Netlify Deploy"]
-    types:
-      - completed
+  workflow_call:
+
 jobs:
   release:
     permissions:
