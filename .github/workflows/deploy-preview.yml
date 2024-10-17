@@ -14,7 +14,7 @@ permissions:
   issues: write
 
 jobs:
-  check:
+  quality-checks:
     uses: ./.github/workflows/quality-checks.yml
     secrets: inherit
 
