@@ -19,6 +19,6 @@ jobs:
     secrets: inherit
 
   publish-preview:
-    needs: [check]
+    needs: [quality-checks]
     uses: ./.github/workflows/publish-preview.yml
     secrets: inherit

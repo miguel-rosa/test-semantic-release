@@ -16,7 +16,7 @@ jobs:
     secrets: inherit
 
   publish-production:
-    needs: [check]
+    needs: [quality-checks]
     uses: ./.github/workflows/publish-production.yml
     secrets: inherit
 
