@@ -1,24 +1,24 @@
-name: Preview Deployment
+# name: Preview Deployment
 
-on:
-  pull_request:
-    branches:
-      - main
+# on:
+#   pull_request:
+#     branches:
+#       - main
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+# concurrency:
+#   group: ${{ github.workflow }}-${{ github.ref }}
+#   cancel-in-progress: true
 
-permissions:
-  pull-requests: write
-  issues: write
+# permissions:
+#   pull-requests: write
+#   issues: write
 
-jobs:
-  quality-checks:
-    uses: ./.github/workflows/quality-checks.yml
-    secrets: inherit
+# jobs:
+#   quality-checks:
+#     uses: ./.github/workflows/quality-checks.yml
+#     secrets: inherit
 
-  publish-preview:
-    needs: [check]
-    uses: ./.github/workflows/publish-preview.yml
-    secrets: inherit
+#   publish-preview:
+#     needs: [quality-checks]
+#     uses: ./.github/workflows/publish-preview.yml
+#     secrets: inherit
