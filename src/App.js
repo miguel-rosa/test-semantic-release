@@ -1,5 +1,22 @@
 import logo from "./logo.svg";
 import "./App.css";
+import posthog from "posthog-js";
+
+export const initTracking = function () {
+  posthog.init("phc_7fBqYHoSDdTt39dCRdJVMe63GQ5GH89pBjlP3r3IzWk", {
+    // api_host: `${process.env.REACT_APP_POSTHOG_HOST}/ingest`,
+    api_host: `https://us.i.posthog.com`,
+    // api_host: `${window.location.origin}/ingest/`,
+    // ui_host: "https://us.posthog.com",
+  });
+  // }
+
+  posthog.register({
+    application: "test-semantic-release",
+  });
+};
+
+initTracking();
 
 function App() {
   return (
