@@ -1,26 +1,26 @@
-name: Production Deployment
+# name: Production Deployment
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-permissions:
-  contents: write
-  issues: write
-  pull-requests: write
+# permissions:
+#   contents: write
+#   issues: write
+#   pull-requests: write
 
-jobs:
-  quality-checks:
-    uses: ./.github/workflows/quality-checks.yml
-    secrets: inherit
+# jobs:
+#   quality-checks:
+#     uses: ./.github/workflows/quality-checks.yml
+#     secrets: inherit
 
-  publish-production:
-    needs: [quality-checks]
-    uses: ./.github/workflows/publish-production.yml
-    secrets: inherit
+#   publish-production:
+#     needs: [quality-checks]
+#     uses: ./.github/workflows/publish-production.yml
+#     secrets: inherit
 
-  release:
-    needs: [publish-production]
-    uses: ./.github/workflows/release.yml
-    secrets: inherit
+#   release:
+#     needs: [publish-production]
+#     uses: ./.github/workflows/release.yml
+#     secrets: inherit
